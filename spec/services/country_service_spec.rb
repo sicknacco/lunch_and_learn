@@ -8,7 +8,7 @@ RSpec.describe CountryService do
     expect(country[0]).to have_key :name
     expect(country[0][:name]).to have_key :common
     expect(country[0][:name][:common]).to be_a String
-    expect(country[0][:name][:common]).to eq('Thailand')
+    expect(country[0][:name][:common]).to eq('Thailand') # < Country Name
   end
 
   it 'can create a connection, and get all countries', :vcr do

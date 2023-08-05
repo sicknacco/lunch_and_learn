@@ -8,4 +8,9 @@ class CountryService
     response = conn.get("name/#{country}")
     JSON.parse(response.body, symbolize_names: true)
   end
+
+  def all_countries
+    response = conn.get('all')
+    JSON.parse(response.body, symbolize_names: true)
+  end
 end
