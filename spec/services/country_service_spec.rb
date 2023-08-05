@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CountryService do
   it 'can create a connection, and get a single country', :vcr do
-    country = CountryService.new.get_country('Thailand')
+    country = CountryService.new.one_country('Thailand')
  
     expect(country).to be_an Array
     expect(country[0]).to have_key :name
