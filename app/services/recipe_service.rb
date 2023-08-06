@@ -8,7 +8,7 @@ class RecipeService
     end
   end
 
-  def get_recipe(country)
+  def get_recipes(country)
     response = conn.get("/api/recipes/v2?q=#{country}")
     JSON.parse(response.body, symbolize_names: true)
   end
