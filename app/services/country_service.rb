@@ -4,13 +4,17 @@ class CountryService
     end
   end
 
-  def one_country(country)
-    response = conn.get("name/#{country}")
+  def get_url(url)
+    response = conn.get(url)
     JSON.parse(response.body, symbolize_names: true)
   end
 
+  def one_country(country)
+    get_url("name/#{country}")
+    
+  end
+
   def all_countries
-    response = conn.get('all')
-    JSON.parse(response.body, symbolize_names: true)
+    get_url('all')
   end
 end
