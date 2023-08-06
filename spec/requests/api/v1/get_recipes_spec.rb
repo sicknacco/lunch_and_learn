@@ -67,4 +67,33 @@ describe 'Recipe API' do
       expect(recipe[:attributes].keys.size).to eq(4)
     end
   end
+
+  it 'returns an empty array if no recipes are found', :vcr do
+    headers = { 'CONTENT_TYPE' => 'application/json' }
+    country = 'asl;kghjqwoprgih'
+
+    get("/api/v1/recipes?country=#{country}", headers: headers)
+
+    expect(response).to be_successful
+
+    recipes = JSON.parse(response.body, symbolize_names: true)
+
+    expect(recipes).to be_a Hash
+    expect(recipes).to have_key :data
+    expect(recipes[:data]).to be_an Array
+    expect(recipes[:data]).to eq([])
+  end
+
+  it 'returns an empty array if an empty string is given', :vcr do
+    get "/api/v1/recipes?country="
+    
+    expect(response).to be_successful
+
+    no_recipes = JSON.parse(response.body,symbolize_names: true)
+
+    expect(no_recipes).to be_a(Hash)
+    expect(no_recipes).to have_key(:data)
+    expect(no_recipes[:data]).to be_an(Array)
+    expect(no_recipes[:data]).to eq([])
+  end
 end
