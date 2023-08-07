@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Create User API" do
   describe "POST /api/v1/users" do
     it 'can create a new user' do
-      user_params = {
+      payload = {      ### < -------aka user_params
         name: 'Bob',
         email: 'bob@website.com',
         password: 'password',
@@ -15,7 +15,7 @@ describe "Create User API" do
         "ACCEPT" => "application/json"
       }
       
-      post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
+      post "/api/v1/users", headers: headers, params: JSON.generate(payload)
       
       expect(response).to be_successful
       expect(response.status).to eq(201)
