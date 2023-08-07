@@ -21,7 +21,7 @@ describe "Create User API" do
 
       user_data = JSON.parse(response.body, symbolize_names: true)
 
-      expect(User.all.count).to eq(1)
+      expect(User.count).to eq(1)
     end
   end
 end
