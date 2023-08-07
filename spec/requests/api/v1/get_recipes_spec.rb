@@ -17,7 +17,7 @@ describe 'Recipe API' do
 
     recipes[:data].each do |recipe|
       expect(recipe).to have_key :id
-      expect(recipe[:id]).to eq("null")
+      expect(recipe[:id]).to eq(nil)
       expect(recipe).to have_key :type
       expect(recipe[:type]).to eq("recipe")
 
@@ -50,7 +50,7 @@ describe 'Recipe API' do
 
     recipes[:data].each do |recipe|
       expect(recipe).to have_key :id
-      expect(recipe[:id]).to eq("null")
+      expect(recipe[:id]).to eq(nil)
       expect(recipe).to have_key :type
       expect(recipe[:type]).to eq("recipe")
 
