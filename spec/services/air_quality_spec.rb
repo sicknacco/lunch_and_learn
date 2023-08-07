@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe AirQualityService do
   it 'can retrieve air quality data for a capital city', :vcr do
     air_quality = AirQualityService.new.air_quality_data('Nigeria')
-# require 'pry'; binding.pry
+
     expect(air_quality).to be_a Hash
     expect(air_quality).to have_key :overall_aqi
     expect(air_quality).to have_key :"PM2.5"
