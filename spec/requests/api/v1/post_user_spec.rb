@@ -10,13 +10,18 @@ describe "Create User API" do
         password_confirmation: 'password'
       }
 
-      headers = { "CONTENT_TYPE" => "application/json" }
-
+      headers = {
+        "CONTENT_TYPE" => "application/json",
+        "ACCEPT" => "application/json"
+      }
+      
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
-
+      
       expect(response).to be_successful
 
-      created_user = JSON.parse(response.body, symbolize_names: true)
+      user_data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(User.all.count).to eq(1)
     end
   end
 end
