@@ -3,6 +3,8 @@ class AirQualityService
     Faraday.new(url: 'https://api.api-ninjas.com/v1') do |faraday|
       faraday.headers['Content-Type'] = 'application/json'
       faraday.headers['X-Api-Key'] = ENV['AIR_QUALITY_API_KEY']
+      faraday.params['city'] = 'Lagos'
+      faraday.params['country'] = 'Nigeria'
     end
   end
 
@@ -12,6 +14,6 @@ class AirQualityService
   end
 
   def air_quality_data(country)
-    get_url("airquality?country=#{country}")
+    get_url("airquality?")
   end
 end
