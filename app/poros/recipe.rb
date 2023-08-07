@@ -10,6 +10,6 @@ class Recipe
     @url = data[:recipe][:url]
     @country = country
     @image = data[:recipe][:image]
-    @id = 'null'
+    @id = nil
   end
 end

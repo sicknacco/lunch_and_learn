@@ -14,7 +14,7 @@ RSpec.describe RecipeFacade, :vcr do
       
       expect(recipes).to all(be_a(Recipe))
       expect(recipes[0].country).to eq('Thailand')
-      expect(recipes[0].id).to eq('null')
+      expect(recipes[0].id).to eq(nil)
       expect(recipes[0].image).to be_a(String)
       expect(recipes[0].title).to eq("Andy Ricker's Naam Cheuam Naam Taan Piip (Palm Sugar Simple Syrup)")
       expect(recipes[0].url).to eq("https://www.seriouseats.com/recipes/2013/11/andy-rickers-naam-cheuam-naam-taan-piip-palm-sugar-simple-syrup.html")
