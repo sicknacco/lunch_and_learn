@@ -21,7 +21,7 @@ class LearningResourcesSerializer
     }
   end
 
-  def format_empty_resources
+  def format_empty_resources(country)
     {
       data: {
         id: nil,
