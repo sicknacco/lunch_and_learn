@@ -6,7 +6,7 @@ RSpec.describe AirQualityFacade, :vcr do
       country = 'Nigeria'
       air_quality = AirQualityFacade.new.get_air_quality(country)
 
-      expect(air_quality).to be_an_instance_of(AirQuality)
+      expect(air_quality).to be_a AirQuality
       expect(air_quality).to be_a Hash
       expect(air_quality).to have_key :overall_aqi
       expect(air_quality).to have_key :"PM2.5"
