@@ -20,4 +20,18 @@ class LearningResourcesSerializer
       }
     }
   end
+
+  def format_empty_resources
+    {
+      data: {
+        id: nil,
+        type: 'learning_resource',
+        attributes: {
+            country: country,
+            video: {},
+            images: []
+        }
+      }
+    }
+  end
 end
