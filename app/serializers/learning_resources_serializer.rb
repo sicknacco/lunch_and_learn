@@ -3,12 +3,12 @@ class LearningResourcesSerializer
     {
       data: {
         id: nil,
-        type: 'learning_resources',
+        type: 'learning_resource',
         attributes: {
             country: country,
             video: {
               title: video.title,
-              youtube_video_id: video.youtube_video_id,
+              youtube_video_id: video.youtube_video_id
               },
             images: images.map do |image|
               {
