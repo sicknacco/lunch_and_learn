@@ -7,7 +7,7 @@ RSpec.describe BooksFacade do
         books = BooksFacade.new.city_books('bangkok', 5)
 
         # expect(books).to be_an Array
-        expect(books.first).to be_a Book
+        expect(books.first).to be_a Bo
       end
     end
   end
