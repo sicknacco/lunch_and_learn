@@ -58,5 +58,23 @@ RSpec.describe "Get Favorites API" do
         expect(favorite[:attributes].size).to eq(4)
       end
     end
+
+    it 'cannot get favorites if api_key is bad' do
+      headers = {
+        "CONTENT_TYPE" => "application/json",
+        "ACCEPT" => "application/json"
+      }
+
+      get "/api/v1/favorites?api_key=12", headers: headers
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
+    
+      error_data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(error_data).to be_a Hash
+      expect(error_data).to have_key(:errors)
+      expect(error_data[:errors]).to eq("Invalid API Key")
+    end
   end
 end
