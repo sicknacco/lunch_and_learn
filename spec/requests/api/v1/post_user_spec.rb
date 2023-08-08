@@ -9,7 +9,6 @@ describe "Create User API" do
         password: 'password',
         password_confirmation: 'password'
       }
-
       headers = {
         "CONTENT_TYPE" => "application/json",
         "ACCEPT" => "application/json"
@@ -42,6 +41,31 @@ describe "Create User API" do
 
       expect(user_data[:data][:attributes]).to have_key(:api_key)
       expect(user_data[:data][:attributes][:api_key]).to eq(new_user.api_key)
+    end
+
+    it 'cannot create a new user if email is already taken' do
+      User.create!(name: 'Bob', email: 'bob@bob.com', password: 'password', password_confirmation: 'password', api_key: '12345')
+      payload = {
+        name: 'Other Bob',
+        email: 'bob@bob.com',
+        password: 'password',
+        password_confirmation: 'password'
+      }
+      headers = {
+        "CONTENT_TYPE" => "application/json",
+        "ACCEPT" => "application/json"
+      }
+
+      post "/api/v1/users", headers: headers, params: JSON.generate(payload)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      error_data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(error_data).to be_a Hash
+      expect(error_data).to have_key(:errors)
+      expect(error_data[:errors]).to eq('Email has already been taken')
     end
   end
 end
