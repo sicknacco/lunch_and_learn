@@ -2,7 +2,11 @@ class Api::V1::FavoritesController < ApplicationController
 
   def index
     @user = User.find_by(api_key: params[:api_key])
-    render json: FavoriteSerializer.new(@user.favorites)
+    if @user.nil?
+      render json: { errors: "Invalid API Key" }, status: 401
+    else
+      render json: FavoriteSerializer.new(@user.favorites)
+    end
     # require 'pry'; binding.pry
   end
 
