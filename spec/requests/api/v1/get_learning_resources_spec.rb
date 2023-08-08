@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Learning Resource API' do
+RSpec.describe 'Learning Resource API' do
   it 'can get learning resources for a chosen country', :vcr do
     country = 'Thailand'
 

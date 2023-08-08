@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Create User API" do
+RSpec.describe "Create User API" do
   describe "POST /api/v1/users" do
     it 'can create a new user' do
       payload = {      ### < -------aka user_params
