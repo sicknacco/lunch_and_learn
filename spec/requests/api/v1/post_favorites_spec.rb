@@ -27,10 +27,12 @@ RSpec.describe "Post Favorites API" do
       expect(response).to be_successful
       expect(response.status).to eq(201)
 
-      favorite_data = JSON.parse(response.body, symbolize_names: true)
+      message = JSON.parse(response.body, symbolize_names: true)
 
       expect(Favorite.count).to eq(1)
-      expect(favorite_data).to be_a Hash
+      expect(message).to be_a Hash
+      expect(message).to have_key(:success)
+      expect(message[:success]).to eq("Favorite added successfully")
     end
   end
 end

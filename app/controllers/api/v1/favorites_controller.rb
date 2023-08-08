@@ -1,9 +1,10 @@
 class Api::V1::FavoritesController < ApplicationController
   def create
     @user = User.find_by(api_key: params[:api_key])
-    favorite = Favorite.new(favorite_params)
-    # favorite = @user.favorites.new(favorite_params)
-    require 'pry'; binding.pry
+    favorite = @user.favorites.new(favorite_params)
+    if favorite.save
+      render json: { success: "Favorite added successfully" }, status: 201
+    end
   end
 
 
