@@ -22,7 +22,7 @@ RSpec.describe "Get Favorites API" do
                                   recipe_link: 'https://www.allrecipes.com/grilled-chicken-street-tacos-recipe-7553311',
                                   recipe_title: 'Grilled Chicken Street Tacos')
 
-    @favorite3 = Favorite.create!(user_id: @user2.id, country: 'Italy',
+    @favorite3 = Favorite.create!(user_id: @user1.id, country: 'Italy',
                                   recipe_link: 'https://www.allrecipes.com/baked-italian-sub-recipe-7570313',
                                   recipe_title: 'Baked Italian Sub')
   end
@@ -42,7 +42,21 @@ RSpec.describe "Get Favorites API" do
       favorites = JSON.parse(response.body, symbolize_names: true)
 
       expect(favorites).to be_a Hash
-      require 'pry'; binding.pry
+      expect(favorites).to have_key(:data)
+      expect(favorites[:data]).to be_an Array
+      expect(favorites[:data].size).to eq(3)
+
+      favorites[:data].each do |favorite|
+        expect(favorite).to have_key(:id)
+        expect(favorite).to have_key(:type)
+        expect(favorite).to have_key(:attributes)
+        
+        expect(favorite[:attributes]).to have_key(:recipe_title)
+        expect(favorite[:attributes]).to have_key(:recipe_link)
+        expect(favorite[:attributes]).to have_key(:country)
+        expect(favorite[:attributes]).to have_key(:created_at)
+        expect(favorite[:attributes].size).to eq(4)
+      end
     end
   end
 end
