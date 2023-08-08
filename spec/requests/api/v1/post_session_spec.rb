@@ -47,7 +47,7 @@ RSpec.describe "Create Sessions API" do
       expect(session_data[:data][:attributes].keys.size).to eq(3)
     end
 
-    it 'cannot create a new session if credentials are bad' do
+    it 'cannot create a new session if password is bad' do
       payload = {
         email: 'bob@bob.com',
         password: 'password1'
@@ -64,6 +64,8 @@ RSpec.describe "Create Sessions API" do
       error_data = JSON.parse(response.body, symbolize_names: true)
 
       expect(error_data).to be_a Hash
+      expect(error_data).to have_key(:errors)
+      expect(error_data[:errors]).to eq('Invalid credentials')
     end
   end
 end
