@@ -3,7 +3,7 @@ class Api::V1::FavoritesController < ApplicationController
     @user = User.find_by(api_key: params[:api_key])
     favorite = Favorite.new(favorite_params)
     # favorite = @user.favorites.new(favorite_params)
-    # require 'pry'; binding.pry
+    require 'pry'; binding.pry
   end
 
 
