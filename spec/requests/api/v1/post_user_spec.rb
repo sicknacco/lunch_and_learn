@@ -67,5 +67,32 @@ describe "Create User API" do
       expect(error_data).to have_key(:errors)
       expect(error_data[:errors]).to eq('Email has already been taken')
     end
+
+    it 'cannot create a new user if passwords do not match' do
+      payload = {
+        name: 'Tim',
+        email: 'tim@tim.com',
+        password: 'password',
+        password_confirmation: 'password1'
+      }
+      headers = {
+        "CONTENT_TYPE" => "application/json",
+        "ACCEPT" => "application/json"
+      }
+
+      post "/api/v1/users", headers: headers, params: JSON.generate(payload)
+
+      expect(response).to_not be_successful
+
+      expect(response.status).to eq(400)
+
+      error_data = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(error_data).to be_a Hash
+      expect(error_data).to have_key(:errors)
+      expect(error_data[:errors]).to eq("Password confirmation doesn't match Password")
+    end
+
+    it 
   end
 end
