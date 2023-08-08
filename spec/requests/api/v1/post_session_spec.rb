@@ -18,6 +18,8 @@ RSpec.describe "Create Sessions API" do
       post "/api/v1/sessions", headers: headers, params: JSON.generate(payload)
 
       expect(response).to be_successful
+
+      session_data = JSON.parse(response.body, symbolize_names: true)
       
     end
   end
