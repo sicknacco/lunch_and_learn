@@ -44,7 +44,11 @@ RSpec.describe "Create User API" do
     end
 
     it 'cannot create a new user if email is already taken' do
-      User.create!(name: 'Bob', email: 'bob@bob.com', password: 'password', password_confirmation: 'password', api_key: '12345')
+      User.create!(name: 'Bob',
+                  email: 'bob@bob.com',
+                  password: 'password',
+                  password_confirmation: 'password',
+                  api_key: '12345')
       payload = {
         name: 'Other Bob',
         email: 'bob@bob.com',
