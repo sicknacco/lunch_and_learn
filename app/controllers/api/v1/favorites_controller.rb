@@ -1,8 +1,11 @@
 class Api::V1::FavoritesController < ApplicationController
   def create
     @user = User.find_by(api_key: params[:api_key])
-    favorite = @user.favorites.new(favorite_params)
-    if favorite.save
+    if @user.nil?
+      render json: { errors: "Invalid API Key" }, status: 401
+    else
+      favorite = @user.favorites.new(favorite_params)
+      favorite.save
       render json: { success: "Favorite added successfully" }, status: 201
     end
   end

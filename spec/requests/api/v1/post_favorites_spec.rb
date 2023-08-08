@@ -34,5 +34,29 @@ RSpec.describe "Post Favorites API" do
       expect(message).to have_key(:success)
       expect(message[:success]).to eq("Favorite added successfully")
     end
+
+    it 'cannot add a favorite if api_key is bad' do
+      payload = {
+        api_key: '12',
+        country: 'Thailand',
+        recipe_link: 'https://www.allrecipes.com/recipe/87872/sweet-chili-thai-sauce/',
+        recipe_title: 'Sweet Chili Thai Sauce'
+      }
+      headers = {
+        "CONTENT_TYPE" => "application/json",
+        "ACCEPT" => "application/json"
+      }
+
+      post "/api/v1/favorites", headers: headers, params: JSON.generate(payload)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
+    
+      error_data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(error_data).to be_a Hash
+      expect(error_data).to have_key(:errors)
+      expect(error_data[:errors]).to eq("Invalid API Key")
+    end
   end
 end
