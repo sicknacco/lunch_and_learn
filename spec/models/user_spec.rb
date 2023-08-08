@@ -10,6 +10,10 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of :password }
   end
 
+  describe 'relationships' do
+    it { should have_many :favorites }
+  end
+
   describe '#generate_api_key' do
     it 'can generate an api key' do
 

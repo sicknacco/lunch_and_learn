@@ -7,6 +7,8 @@ class User < ApplicationRecord
   validates :password, presence: true
   has_secure_password
 
+  has_many :favorites, dependent: :destroy
+
   def generate_api_key
     self.api_key = SecureRandom.hex
   end
