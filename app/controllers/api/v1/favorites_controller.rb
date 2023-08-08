@@ -7,7 +7,6 @@ class Api::V1::FavoritesController < ApplicationController
     else
       render json: FavoriteSerializer.new(@user.favorites)
     end
-    # require 'pry'; binding.pry
   end
 
   def create
