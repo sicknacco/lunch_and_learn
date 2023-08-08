@@ -93,6 +93,52 @@ describe "Create User API" do
       expect(error_data[:errors]).to eq("Password confirmation doesn't match Password")
     end
 
-    it 
+    it 'cannot create a new user if name is missing' do
+      payload = {
+        name: '',
+        email: 'tim@tim.com',
+        password: 'password',
+        password_confirmation: 'password'
+      }
+      headers = {
+        "CONTENT_TYPE" => "application/json",
+        "ACCEPT" => "application/json"
+      }
+      post "/api/v1/users", headers: headers, params: JSON.generate(payload)
+
+      expect(response).to_not be_successful
+
+      expect(response.status).to eq(400)
+
+      error_data = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(error_data).to be_a Hash
+      expect(error_data).to have_key(:errors)
+      expect(error_data[:errors]).to eq("Name can't be blank")
+    end
+
+    it 'cannot create a new user without an email' do
+      payload = {
+        name: 'Tim',
+        email: '',
+        password: 'password',
+        password_confirmation: 'password'
+      }
+      headers = {
+        "CONTENT_TYPE" => "application/json",
+        "ACCEPT" => "application/json"
+      }
+      post "/api/v1/users", headers: headers, params: JSON.generate(payload)
+
+      expect(response).to_not be_successful
+
+      expect(response.status).to eq(400)
+
+      error_data = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(error_data).to be_a Hash
+      expect(error_data).to have_key(:errors)
+      expect(error_data[:errors]).to eq("Email can't be blank")
+    end
   end
 end
