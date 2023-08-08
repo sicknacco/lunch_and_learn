@@ -34,7 +34,7 @@ RSpec.describe "Get Favorites API" do
         "ACCEPT" => "application/json"
       }
 
-      get "/api/v1/favorites?api_key=123456789", headers: headers
+      get "/api/v1/favorites?api_key=#{@user1.api_key}", headers: headers
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -75,6 +75,23 @@ RSpec.describe "Get Favorites API" do
       expect(error_data).to be_a Hash
       expect(error_data).to have_key(:errors)
       expect(error_data[:errors]).to eq("Invalid API Key")
+    end
+
+    it 'returns an empty array if user has no favorites' do
+      headers = {
+        "CONTENT_TYPE" => "application/json",
+        "ACCEPT" => "application/json"
+      }
+
+      get "/api/v1/favorites?api_key=#{@user2.api_key}", headers: headers
+
+      favorites = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+      expect(favorites).to be_a Hash
+      expect(favorites).to have_key(:data)
+      expect(favorites[:data]).to eq([])
     end
   end
 end
