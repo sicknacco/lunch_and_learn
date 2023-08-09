@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Books API' do
-  it 'can retrieve books data for a country capital' do
+  it 'can retrieve books data for a country capital', :vcr do
     country = 'Nigeria'
     quantity = 5
 
