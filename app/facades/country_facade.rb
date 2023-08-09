@@ -10,7 +10,7 @@ class CountryFacade
     end
   end
 
-  def get_capital(country)
+  def get_capital(country)  ##<< -- aka 'location', 'Nigeria' coming from controller
     CountryService.new.one_country(country)[0][:capital][0]
   end
 end
