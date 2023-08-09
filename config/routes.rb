@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   post '/api/v1/favorites', to: 'api/v1/favorites#create'
   get '/api/v1/favorites', to: 'api/v1/favorites#index'
+
+  get '/api/v1/book_search', to: 'api/v1/book_search#index'
 end
