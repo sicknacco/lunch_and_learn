@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Recipe API' do
+RSpec.describe 'Recipe API' do
   it 'can get recipes for a chosen country', :vcr do
     headers = { 'CONTENT_TYPE' => 'application/json' }
     country = 'Thailand'

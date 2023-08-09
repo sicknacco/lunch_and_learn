@@ -16,5 +16,12 @@ RSpec.describe CountryFacade, :vcr do
       expect(country).to_not be_empty
       expect(country).to eq('Thailand')
     end
+
+    it "can return the capital of a country" do
+      capital = CountryFacade.new.get_capital('Thailand')
+
+      expect(capital).to be_a String
+      expect(capital).to eq('Bangkok')
+    end
   end
 end
