@@ -1,14 +1,13 @@
 class AirQualitySerializer
-  def format_air_quality(country)
-
+  def format_air_quality(air_data, capital)  ##<< --- air_data and capital are from the controller
     { data:
       {   id: nil,
           type: "air_quality",
-          city: "Abuja",
+          city: capital,
           attributes: 
-            { aqi: 27,
-              pm25_concentration: 8.45,
-              co_concentration: 547.41
+            { aqi: air_data[:overall_aqi],
+              pm25_concentration: air_data[:"PM2.5"][:concentration],
+              co_concentration: air_data[:CO][:concentration]
             } 
       }
     }
