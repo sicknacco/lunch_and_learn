@@ -1,10 +1,8 @@
 class AirQualityService
   def conn
-    Faraday.new(url: 'https://api.api-ninjas.com/v1') do |faraday|
+    Faraday.new(url: 'https://api.api-ninjas.com') do |faraday|
       faraday.headers['Content-Type'] = 'application/json'
       faraday.headers['X-Api-Key'] = ENV['AIR_QUALITY_API_KEY']
-      faraday.params['city'] = 'Lagos'
-      faraday.params['country'] = 'Nigeria'
     end
   end
 
@@ -13,7 +11,7 @@ class AirQualityService
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def air_quality_data(country)
-    get_url("airquality?")
+  def air_quality_data(capital)
+    get_url("v1/airquality?city=#{capital}")
   end
 end
